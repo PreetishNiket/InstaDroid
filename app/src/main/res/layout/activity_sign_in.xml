@@ -68,4 +68,13 @@
         android:layout_marginBottom="20dp"
         android:textColor="@android:color/white"/>
 
+    <ProgressBar
+        android:id="@+id/pBar"
+        android:layout_width="74dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/login_btn"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
+        android:visibility="gone" />
+
 </RelativeLayout>
