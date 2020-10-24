@@ -34,8 +34,8 @@ class SignInActivity : AppCompatActivity() {
         val email = email_login.text.toString()
         val password = pass_login.text.toString()
         when {
-            TextUtils.isEmpty(email) -> email_signUp.error = "This field is required"
-            TextUtils.isEmpty(password) -> pass_signUp.error = "This field is required"
+            TextUtils.isEmpty(email) -> email_login.error = "This field is required"
+            TextUtils.isEmpty(password) -> pass_login.error = "This field is required"
             else -> {
                 pBar.visibility = View.VISIBLE
                 auth.signInWithEmailAndPassword(email, password)

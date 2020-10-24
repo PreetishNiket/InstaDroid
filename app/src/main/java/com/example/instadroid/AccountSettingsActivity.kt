@@ -19,7 +19,8 @@ class AccountSettingsActivity : AppCompatActivity() {
         }
         logout_btn.setOnClickListener {
             auth.signOut()
-            startActivity(Intent(this,SignInActivity::class.java))
+            val i=Intent(this,SignInActivity::class.java)
+            i.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             finish()
         }
     }
