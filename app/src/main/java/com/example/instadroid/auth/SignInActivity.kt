@@ -46,7 +46,7 @@ class SignInActivity : AppCompatActivity() {
                         } else {
                             val message = it.exception.toString()
                             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-                            pgBar.visibility = View.GONE
+                            pBar.visibility = View.GONE
                             auth.signOut()
                         }
                     }
