@@ -16,6 +16,7 @@ class SignInActivity : AppCompatActivity() {
         }
         login_btn.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 }
