@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "563204867251",
+    "firebase_url": "https://instadroid-5c83f.firebaseio.com",
+    "project_id": "instadroid-5c83f",
+    "storage_bucket": "instadroid-5c83f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:563204867251:android:8cc7241957cd4c3e2f5cc6",
+        "android_client_info": {
+          "package_name": "com.example.instadroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "563204867251-vsktv2vpfpoased52hg6a0b3goq6fi3q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.instadroid",
+            "certificate_hash": "7797b0b7060ea56139bea81357ecdebbc404cad9"
+          }
+        },
+        {
+          "client_id": "563204867251-jmnoee37q9o1qm61ratiusv7hfbd44a6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsnJ8h4DuXhnKGnMdNJlGyE1tCckIf15k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "563204867251-jmnoee37q9o1qm61ratiusv7hfbd44a6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
