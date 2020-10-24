@@ -13,6 +13,7 @@ class SignInActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_in)
         signUp_link_btn.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
+            finish()
         }
         login_btn.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
