@@ -10,9 +10,9 @@ import com.example.instadroid.MainActivity
 import com.example.instadroid.R
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_in.*
-import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignInActivity : AppCompatActivity() {
+
     private val auth by lazy {
         FirebaseAuth.getInstance()
     }
@@ -27,7 +27,6 @@ class SignInActivity : AppCompatActivity() {
         login_btn.setOnClickListener {
             loginUser()
         }
-
     }
 
     private fun loginUser() {
