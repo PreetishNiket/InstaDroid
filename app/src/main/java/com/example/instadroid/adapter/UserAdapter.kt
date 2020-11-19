@@ -24,8 +24,7 @@ class UserAdapter(private var context: Context,
        with(holder){
            userNameTV.text=userList[position].userName
            userFullNameTv.text=userList[position].fullName
-           Picasso.get().load(userList[position].image).into(userProfileImage)
-
+           Picasso.get().load(userList[position].image).placeholder(R.drawable.profile).into(userProfileImage)
        }
     }
 
