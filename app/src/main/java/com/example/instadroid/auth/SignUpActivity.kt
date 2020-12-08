@@ -11,6 +11,8 @@ import com.example.instadroid.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import java.util.*
+import kotlin.collections.HashMap
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,9 +67,9 @@ class SignUpActivity : AppCompatActivity() {
        currentUserId =auth.currentUser!!.uid
 
         val userMap=HashMap<String,Any>()
-        userMap["uid"]=currentUserId
-        userMap["fullName"]=fullName
-        userMap["userName"]=userName
+        userMap["uid"]= currentUserId
+        userMap["fullName"]=fullName.toLowerCase(Locale.ROOT)
+        userMap["userName"]=userName.toLowerCase(Locale.ROOT)
         userMap["email"]=email
         userMap["bio"]="Hey I am new to InstaDroid"
         userMap["image"]="https://firebasestorage.googleapis.com/v0/b/instadroid-5c83f.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=d0549690-917e-4854-8cff-d94e9e5e095f"

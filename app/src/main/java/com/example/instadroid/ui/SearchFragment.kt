@@ -18,13 +18,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_search.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class SearchFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     private var userList: MutableList<User>? = null
     private var userAdapter:UserAdapter?=null
@@ -40,18 +37,37 @@ class SearchFragment : Fragment() {
         userAdapter = context?.let { UserAdapter(it, userList as ArrayList<User>, true) }
         view.rv_search.adapter=userAdapter
         view.search_edit_text.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (view.search_edit_text.text.toString() == "") {
                     Toast.makeText(view.context, "Empty", Toast.LENGTH_SHORT).show()
                 } else {
                     view.rv_search.visibility = View.VISIBLE
                     retrieveUsers()
+                    searchUsers(s.toString().toLowerCase(Locale.ROOT))
                 }
             }
             override fun afterTextChanged(p0: Editable?) {}
         })
         return view
+    }
+
+    private fun searchUsers(inputText: String) {
+        val query=FirebaseDatabase.getInstance().reference.child("Users")
+            .orderByChild("fullName")
+            .startAt(inputText)
+            .endAt(inputText + "\uf8ff")
+        query.addValueEventListener(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                    userList?.clear()
+                    for (snap in snapshot.children){
+                        val user=snap.getValue(User::class.java)
+                        userList?.add(user!!)
+                    }
+                    userAdapter?.notifyDataSetChanged()
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun retrieveUsers() {
