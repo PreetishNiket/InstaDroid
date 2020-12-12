@@ -30,6 +30,11 @@ class UserAdapter(
             userFullNameTv.text = userList[position].fullName
             Picasso.get().load(userList[position].image).placeholder(R.drawable.profile)
                 .into(userProfileImage)
+            followButton.setOnClickListener {
+                if (followButton.text.toString()=="Follow"){
+
+                }
+            }
         }
     }
 
