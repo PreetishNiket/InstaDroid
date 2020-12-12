@@ -33,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
     private val db by lazy {
         FirebaseDatabase.getInstance().reference
     }
-    lateinit var currentUserId:String
+    lateinit var currentUserId: String
 
     private fun createAccount() {
         val fullName = fullName_signUp.text.toString()
@@ -50,7 +50,7 @@ class SignUpActivity : AppCompatActivity() {
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
-                            saveUserInfo(fullName,userName,email)
+                            saveUserInfo(fullName, userName, email)
                         } else {
                             val message = it.exception.toString()
                             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -64,25 +64,25 @@ class SignUpActivity : AppCompatActivity() {
 
 
     private fun saveUserInfo(fullName: String, userName: String, email: String) {
-       currentUserId =auth.currentUser!!.uid
+        currentUserId = auth.currentUser!!.uid
 
-        val userMap=HashMap<String,Any>()
-        userMap["uid"]= currentUserId
-        userMap["fullName"]=fullName.toLowerCase(Locale.ROOT)
-        userMap["userName"]=userName.toLowerCase(Locale.ROOT)
-        userMap["email"]=email
-        userMap["bio"]="Hey I am new to InstaDroid"
-        userMap["image"]="https://firebasestorage.googleapis.com/v0/b/instadroid-5c83f.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=d0549690-917e-4854-8cff-d94e9e5e095f"
+        val userMap = HashMap<String, Any>()
+        userMap["uid"] = currentUserId
+        userMap["fullName"] = fullName.toLowerCase(Locale.ROOT)
+        userMap["userName"] = userName.toLowerCase(Locale.ROOT)
+        userMap["email"] = email
+        userMap["bio"] = "Hey I am new to InstaDroid"
+        userMap["image"] =
+            "https://firebasestorage.googleapis.com/v0/b/instadroid-5c83f.appspot.com/o/Default%20Images%2Fprofile.png?alt=media&token=d0549690-917e-4854-8cff-d94e9e5e095f"
 
         db.child("Users").child(currentUserId).setValue(userMap)
             .addOnCompleteListener {
-                if(it.isSuccessful){
-                    startActivity(Intent(this,MainActivity::class.java))
+                if (it.isSuccessful) {
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
-                    pgBar.visibility=View.GONE
+                    pgBar.visibility = View.GONE
                     Toast.makeText(this, "Account created Successfully", Toast.LENGTH_SHORT).show()
-                }
-                else{
+                } else {
                     val message = it.exception.toString()
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
                     pgBar.visibility = View.GONE

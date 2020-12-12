@@ -1,12 +1,13 @@
 package com.example.instadroid.modelClass
 
-class User{
-    var bio:String?=null
-    var fullName:String?=null
-    var image: String?=null
-    var userName:String?=null
-    var uid:String?=null
-    constructor(){
+class User {
+    var bio: String? = null
+    var fullName: String? = null
+    var image: String? = null
+    var userName: String? = null
+    var uid: String? = null
+
+    constructor() {
 
     }
 

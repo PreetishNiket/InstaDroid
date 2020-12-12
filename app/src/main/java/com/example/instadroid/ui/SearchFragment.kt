@@ -24,7 +24,7 @@ import kotlin.collections.ArrayList
 class SearchFragment : Fragment() {
 
     private var userList: MutableList<User>? = null
-    private var userAdapter:UserAdapter?=null
+    private var userAdapter: UserAdapter? = null
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,7 +35,7 @@ class SearchFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search, container, false)
         view.rv_search.layoutManager = LinearLayoutManager(context)
         userAdapter = context?.let { UserAdapter(it, userList as ArrayList<User>, true) }
-        view.rv_search.adapter=userAdapter
+        view.rv_search.adapter = userAdapter
         view.search_edit_text.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -47,42 +47,45 @@ class SearchFragment : Fragment() {
                     searchUsers(s.toString().toLowerCase(Locale.ROOT))
                 }
             }
+
             override fun afterTextChanged(p0: Editable?) {}
         })
         return view
     }
 
     private fun searchUsers(inputText: String) {
-        val query=FirebaseDatabase.getInstance().reference.child("Users")
+        val query = FirebaseDatabase.getInstance().reference.child("Users")
             .orderByChild("fullName")
             .startAt(inputText)
             .endAt(inputText + "\uf8ff")
-        query.addValueEventListener(object :ValueEventListener{
+        query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                    userList?.clear()
-                    for (snap in snapshot.children){
-                        val user=snap.getValue(User::class.java)
-                        userList?.add(user!!)
-                    }
-                    userAdapter?.notifyDataSetChanged()
+                userList?.clear()
+                for (snap in snapshot.children) {
+                    val user = snap.getValue(User::class.java)
+                    userList?.add(user!!)
+                }
+                userAdapter?.notifyDataSetChanged()
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
 
     private fun retrieveUsers() {
-        val userRef=FirebaseDatabase.getInstance().reference.child("Users")
-        userRef.addValueEventListener(object :ValueEventListener{
+        val userRef = FirebaseDatabase.getInstance().reference.child("Users")
+        userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (view!!.search_edit_text.text.toString() == "") {
                     userList?.clear()
-                    for (snap in snapshot.children){
-                        val user=snap.getValue(User::class.java)
+                    for (snap in snapshot.children) {
+                        val user = snap.getValue(User::class.java)
                         userList?.add(user!!)
                     }
                     userAdapter?.notifyDataSetChanged()
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {}
         })
     }
